@@ -54,8 +54,9 @@ namespace API.Controllers
 
         public async Task<ActionResult<UserDto>> Login  (LoginDto loginDto)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(x=> 
-                x.UserName.ToLower()==loginDto.Username.ToLower());
+          var user = await _context.Users
+            .Include(p => p.Photos)
+            .SingleOrDefaultAsync(x => x.UserName.ToLower() == loginDto.Username.ToLower());
 
             if(user==null) return Unauthorized(USER_PASSWORD_ERROR_MESSAGE);
 
@@ -71,7 +72,8 @@ namespace API.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                PhotoUrl = user.Photos.FirstOrDefault(p => p.IsMain)?.Url
             };     
         }
         private async Task<bool> UserExists(string username)
