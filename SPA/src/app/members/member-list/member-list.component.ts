@@ -17,6 +17,10 @@ export class MemberListComponent {
   pagination: Pagination | undefined;
   userParams: UserParams | undefined;
   user: User | undefined;
+  genderList = [
+    { value: "female", display: "Females" },
+    { value: "male", display: "Males" },
+  ];
 
   constructor(
     private membersService: MembersService,
@@ -47,7 +51,12 @@ export class MemberListComponent {
       },
     });
   }
-
+  resetFilters() {
+    if (this.user) {
+      this.userParams = new UserParams(this.user);
+      this.loadMembers();
+    }
+  }
   pageChanged(event: any) {
     if (this.userParams && this.userParams?.pageNumber !== event.page) {
       this.userParams.pageNumber = event.page;
