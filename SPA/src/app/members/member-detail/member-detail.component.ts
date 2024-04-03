@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { TabsModule } from "ngx-bootstrap/tabs";
-import { IMember } from "src/app/_models/imember";
+import { Member } from "src/app/_models/member";
 import { MembersService } from "src/app/_services/members.service";
 import { GalleryItem, GalleryModule, ImageItem } from "ng-gallery";
 
@@ -14,7 +14,7 @@ import { GalleryItem, GalleryModule, ImageItem } from "ng-gallery";
   imports: [CommonModule, TabsModule, GalleryModule],
 })
 export class MemberDetailComponent implements OnInit {
-  member: IMember | undefined;
+  member: Member | undefined;
   images: GalleryItem[] = [];
 
   constructor(
