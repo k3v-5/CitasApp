@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="col-4">
-    <div class="card text-white bg-dark mb-3">
+    <div class="card">
       <img
         src="{{ member.photoUrl || './assets/user.png' }}"
         alt="{{ member.knownAs }}"
@@ -29,18 +29,20 @@
         <div>
           <strong>Última conexión:</strong>
           <p>{{ member.lastActive }}</p>
+          <p>{{ member.lastActive + "Z" | timeago }}</p>
         </div>
         <div>
           <strong>Usuario desde:</strong>
           <p>{{ member.created }}</p>
+          <p>{{ member.created | date : "dd MMM yyyy" }}</p>
         </div>
       </div>
       <div class="card-footer">
         <button
           type="submit"
-          class="btn btn-success col-12"
           form="editForm"
           [disabled]="!editForm.dirty"
+          class="btn btn-success col-12"
         >
           Guardar
         </button>
@@ -57,34 +59,31 @@
             [(ngModel)]="member.introduction"
             name="introduction"
             rows="6"
-          >
-          </textarea>
-          <h4 class="mt-4">Buscando</h4>
+          ></textarea>
+          <h4 class="mt-2">Buscando</h4>
           <textarea
             class="form-control"
             [(ngModel)]="member.lookingFor"
-            name="lookingfor"
+            name="lookingFor"
             rows="6"
-          >
-          </textarea>
-          <h4 class="mt-4">Intereses</h4>
+          ></textarea>
+          <h4 class="mt-2">Intereses</h4>
           <textarea
             class="form-control"
             [(ngModel)]="member.interests"
-            name="interest"
+            name="interests"
             rows="6"
-          >
-          </textarea>
-          <h4 class="mt-2">Detalles de la ubicación</h4>
+          ></textarea>
+          <h4 class="mt-2">Detalles de ubicación:</h4>
           <div class="d-flex flex-row align-items-center">
-            <label for="city"> City </label>
+            <label for="city">City: </label>
             <input
               type="text"
               [(ngModel)]="member.city"
               name="city"
               class="form-control mx-2"
             />
-            <label for="country"> Country </label>
+            <label for="country">Country: </label>
             <input
               type="text"
               [(ngModel)]="member.country"
