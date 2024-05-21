@@ -91,6 +91,13 @@ export class MembersService {
   setMainPhoto(photoId: number): Observable<Object> {
     return this.http.put(this.baseUrl + "users/photo/" + photoId, {});
   }
+  addLike(username: string): Observable<Object> {
+    return this.http.post(this.baseUrl + "likes/" + username, {});
+  }
+
+  getLikes(predicate: string): Observable<Object> {
+    return this.http.get(this.baseUrl + "likes?predicate=" + predicate);
+  }
 
   deletePhoto(photoId: number): Observable<Object> {
     console.log("photoId de nuevo: " + photoId);
